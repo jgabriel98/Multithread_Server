@@ -96,16 +96,23 @@ int main(int argc, char *argv[]){
 
     char str[512];
     char resp[512];
-    while(1){
+    int continueLoop=true;
+    while(continueLoop){
         printf(BOLD("Enviar: "));
         scanf(" %[^\n]s", str);
         cout<<"Bytes enviado: "<<cliente.Send(str)<<endl;
 
-        if (cliente.getAnswer(resp, 512) < 0){
-            perror(RED("Servidor desligou"));
+        switch (cliente.getAnswer(resp, 512)){
+            case -1:            
+                perror(RED("Erro ao receber resposta\n"));
+                break;
+            case 0:
+                perror(RED("Servidor desligou\n"));
+                continueLoop = false;
+                break;
+            default:
+                printf(BOLD("server: ") CYN("%s\n\n"), resp);
         }
-        else
-            printf(BOLD("server: ")CYN("%s\n\n"), resp);
 
         if (!strcmp(str, "exit") || !strcmp(str, "bye"))
             break;
