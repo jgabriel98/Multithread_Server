@@ -12,6 +12,11 @@
 
 using namespace std;
 
+
+//fontes de exemplos de clients
+//https : //www.ibm.com/support/knowledgecenter/ssw_ibm_i_72/rzab6/generic.htm
+//https://www.ibm.com/support/knowledgecenter/ssw_ibm_i_72/rzab6/xip6client.htm
+
 class Client;
 
 class Client{
